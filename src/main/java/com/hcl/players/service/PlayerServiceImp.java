@@ -1,8 +1,11 @@
 package com.hcl.players.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hcl.players.entity.Player;
+import com.hcl.players.pojo.PlayerReqDto;
 import com.hcl.players.pojo.PlayerResDto;
 import com.hcl.players.repository.PlayerRepository;
 
@@ -14,9 +17,21 @@ public class PlayerServiceImp implements PlayerService {
 
 	@Override
 	public PlayerResDto playerDetails(Long playerId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	public PlayerResDto save(PlayerReqDto playerReqDto) {
+			
+		PlayerResDto playerResDto = new PlayerResDto();
+		Player player=new Player();
+		
+		BeanUtils.copyProperties(playerReqDto, player);
+	
+		Player playerres = playerRepository.save(player);
+		BeanUtils.copyProperties(playerres, playerResDto);
+		return playerResDto;
+	}	
 	
 		
 	}

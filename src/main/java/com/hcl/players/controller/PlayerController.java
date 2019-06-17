@@ -8,9 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcl.players.pojo.PlayerReqDto;
 import com.hcl.players.pojo.PlayerResDto;
 import com.hcl.players.service.PlayerService;
 
@@ -30,4 +33,12 @@ public class PlayerController {
 		 return new ResponseEntity<>(playerResDto,HttpStatus.OK);
 		 
 	}
+	@PostMapping("/create")
+	public ResponseEntity<PlayerResDto> createPlayer (@RequestBody PlayerReqDto playerReqDto){
+		PlayerResDto playerResDto = playerService.save(playerReqDto);
+		return new ResponseEntity<>(playerResDto, HttpStatus.CREATED);
+		
+		
+	}
+
 }
